@@ -31,10 +31,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+    
+    
       - name: Simulate Deployment
         run: |
           echo "🚀 Starting deployment..."
           echo "✅ Tests passed!"
           echo "📦 Deploying app.py to production..."
-          echo "🎉 Deployment successful!"
+          echo "🎉 Deployment successful!"  
+      
+      - name: Create build artifact
+        run: |
+          mkdir -p dist
+          cp app.py dist/
+          echo "Build completed at $(date)" > dist/build-info.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-app-build
+          path: dist/
