@@ -1,0 +1,18 @@
+stages:
+  - test
+  - deploy
+
+run_tests:
+  stage: test
+  image: python:3.11
+  script:
+    - python test_app.py
+
+deploy_app:
+  stage: deploy
+  image: python:3.11
+  script:
+    - echo "🚀 Deploying..."
+    - echo "🎉 Deployment successful!"
+  only:
+    - main
